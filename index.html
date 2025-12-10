@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-ZVXW43QJJZ"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-ZVXW43QJJZ");
-    </script>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:creator" content="@_gonnoc" />
-    <meta name="twitter:title" content="Pro Micro Web Updater" />
-    <meta
-      name="twitter:description"
-      content="ブラウザからProMicroにファームウェアを書き込めます"
-    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pro Micro Web Updater</title>
+    <title>Pro Micro Web Updater (from the compiler)</title>
   </head>
   <body>
     <main>
-      <h1>Pro Micro Web Updater</h1>
-      <div>
-        <a id="download-file" href="#" download="firm.bin"></a>
-        <input type="file" id="upload-file" />
-      </div>
+      <h1>Pro Micro Web Updater (from the compiler)</h1>
       <div>
         <form id="eeprom">
           eeprom option:
@@ -67,7 +42,7 @@
         <textarea readonly cols="100" rows="20" id="progress"></textarea>
       </div>
       <ol>
-        <li>Open firmware hex file</li>
+        <li>Wait firmware hex file from compiler</li>
         <li>Click flash button</li>
         <li>Reset your Pro Micro to enter bootloader</li>
         <li>Select serial port appeared</li>
@@ -76,11 +51,13 @@
       <div>
         <a
           id="revision"
-          href="https://github.com/sekigon-gonnoc/promicro-web-updater"
+          href="https://github.com/ikeji/promicro-web-updater"
         ></a>
       </div>
       <div>
-        Copyright (c) 2021 <a href="https://nogikes.booth.pm/">のぎけす屋</a>
+        Copyright (c) 2021 <a href="https://nogikes.booth.pm/">のぎけす屋</a><br/>
+        Based on <a href="https://github.com/sekigon-gonnoc/promicro-web-updater">sekigon-gonnoc/promicro-web-updater</a><br/>
+        Modified by @ikeji 2025<br/>
       </div>
       <script src="./src/index.js"></script>
     </main>

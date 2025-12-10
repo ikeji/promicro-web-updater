@@ -60,36 +60,34 @@ async function readFirmware() {
   }
 }
 
-document
-  .getElementById("upload-file")
-  .addEventListener("change", fileUpload, false);
-function fileUpload() {
-  console.log(this.files);
-  firmHex = null;
-  if (this.files.length > 0) {
-    console.log(this.files[0]);
-    let fname = this.files[0].name;
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      function () {
-        try {
-          firmHex = ihex.parse(reader.result);
-          console.log(firmHex);
-          initProgress(
-            `Firmware opened: ${fname}(${firmHex.data.length} bytes)`
-          );
-        } catch (e) {
-          console.error(e);
-          initProgress(`Firmware open failed: ${e.toString()}`);
-          firmHex = null;
-        }
-      },
-      false
-    );
-    reader.readAsText(this.files[0]);
+window.addEventListener('load', ()=>{
+  if (window.opener) {
+    initProgress('Request hex to compiler window.');
+    window.opener.postMessage('request_hex', '*');
+  } else {
+    initProgress('Could not find the sender window.');
   }
-}
+});
+
+window.addEventListener('message', (event) => {
+  if (event.source !== window.opener) {
+    return;
+  }
+  const data = event.data;
+  console.log(data);
+  try {
+    firmHex = ihex.parse(data);
+    console.log(firmHex);
+    initProgress(
+      `Firmware received from compiler: ${firmHex.data.length} bytes.\n` +
+      'Push "flash" button!'
+    );
+  } catch (e) {
+    console.error(e);
+    initProgress(`Firmware open failed: ${e.toString()}`);
+    firmHex = null;
+  }
+});
 
 async function verifyFirmware() {
   if (firmHex == null) {
